@@ -17,7 +17,7 @@ public class Guacamaya {
     /**
      * Descripcion: Este metodo se encarga de iniciar las variables globales
      * pre: El Scanner reader debe estar declarado
-     * pos: l Scanner reader queda inicializado
+     * pos: El Scanner reader queda inicializado
     */
     public static void inicializarGlobales() {
 
@@ -98,33 +98,82 @@ public class Guacamaya {
         unidades = new int[referencias];
 
     }
-
+     /**
+     * Descripcion: Este metodo se encarga de preguntar al usuario la cantidad y el precio de cada referencia para asignarlos en sus 
+     * arreglos respectivos 
+     * pre: El Scanner reader debe estar inicializado
+     * pre: Los arreglos precios y unidades deben estar declarados e inicializados con sus respectivos espacios
+     * pos: Los arreglos precios y unidades quedan con los datos digitados por el usuario
+     */
     public static void solicitarDatos(){
-
+        for(int i=0;i<precios.length;i++){
+        System.out.println("Digite la cantidad de ventas de la referencia:  ["+(i+1)+"]");
+        unidades[i]=reader.nextInt();
+        System.out.println("Digite el precio de la referencia:  ["+(i+1)+"]");
+        System.out.print("$");
+        precios[i]=reader.nextDouble();
+        }
      
     }
-
+    /**
+     * Descripcion: Este metodo se encarga de recorrer todo el arreglo de unidades para sumar cada valor interno 
+     * en cada esapcio y agrergar esta suma a un contador para luego retornar
+     * pre: Los arreglos precios y unidades deben estar inicializados con sus respectivos espacios y datos
+     * @return int sumaUnidades guarda la suma de unidades de cada posicion del arreglo unidades
+     */
     public static int calcularTotalUnidadesVendidas(){
+        int sumaUnidades = 0;
+        for (int i = 0; i < unidades.length; i++) {
+            sumaUnidades += unidades[i];
+        }
 
-        return 0;
+        return sumaUnidades;
 
     }
-
+    /**
+     * Descripcion: Este metodo se encarga de recorrer todo el arreglo de precios y realiza una suma de todos sus datos para luego
+     * hacer una divion entre esta suma y la longitud del arreglo para asi obtener el promedio de precios
+     * pre: Los arreglos precios y unidades deben estar inicializados con sus respectivos espacios y datos
+     * @return double promedioPrecio guarda la division de la suma de los precios entre la longitud del arreglo
+     */
     public static double calcularPrecioPromedio(){
-
-        return 0;
+        int suma = 0, promedioPrecio = 0;
+        for(int i=0;i<precios.length;i++){
+            suma+=precios[i];
+        }
+        promedioPrecio= suma/precios.length;
+        return promedioPrecio;
 
     }
-
+    /**
+     * Descripcion: Este metodo se encarga de calcular las ventas totales de cada una de las referencias y sumarlas para el total
+     * pre: Los arreglos precios y unidades deben estar inicializados con sus respectivos espacios y datos
+     * @return double sumaVentasTotales en esta variable se almacena todas ventas de cada referencia
+     */
     public static double calcularVentasTotales(){
+        double sumaVentasTotales = 0;
+        for(int i=0;i<precios.length;i++){
+            sumaVentasTotales+=precios[i]*unidades[i];
+        }
 
-        return 0;
+        return sumaVentasTotales;
 
     }
-
+/**
+ *Descripcion: este metodo identifica si las ventas de una referencias estan por encima de un limite digitado por el usuario
+ pre: Los arreglos precios y unidades deben estar inicializados con sus respectivos espacios y datos
+ * @param double limite esta variable es un precio minimo digitado por el usuario 
+ * @return int upLimite esta variable devuelve el numero de referencias que tienen sus ventas por encima del limite
+ */
     public static int consultarReferenciasSobreLimite(double limite){
+        int upLimite = 0;
 
-        return 0;
+        for(int i=0;i<precios.length;i++){
+            if((precios[i]*unidades[i])>limite){
+                upLimite++;
+            }
+        }
+        return upLimite;
 
     }
 
